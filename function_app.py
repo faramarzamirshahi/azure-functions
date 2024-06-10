@@ -1,8 +1,10 @@
 import azure.functions as func
 import logging
 from bp_pymssql import bp_test_pymssql
+from bp_pyodbc import bp_test_pyodbc
 app = func.FunctionApp(http_auth_level=func.AuthLevel.ANONYMOUS)
 app.register_blueprint(bp_test_pymssql)
+app.register_blueprint(bp_test_pyodbc)
 
 @app.route(route="http_trigger_odbc")
 def http_trigger_odbc(req: func.HttpRequest) -> func.HttpResponse:
