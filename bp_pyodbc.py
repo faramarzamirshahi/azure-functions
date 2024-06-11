@@ -3,11 +3,15 @@ import logging
 import azure.functions as func
 import json
 import pyodbc
+import os
 bp_test_pyodbc = func.Blueprint()
 @bp_test_pyodbc.function_name(name = "test_pyodbc")
 @bp_test_pyodbc.route(route="test_pyodbc")
 def test_pyodbc(req: func.HttpRequest) -> func.HttpResponse:
-    conn = pyodbc.connect('DRIVER={ODBC Driver 18 for SQL Server};SERVER=da-cc-sqldb-fz-test.database.windows.net;DATABASE=rd-cc-sqldb-fzdb-test;UID=azureuser;PWD=Obi@2024')
+    #conn = pyodbc.connect('DRIVER={ODBC Driver 18 for SQL Server};SERVER=da-cc-sqldb-fz-test.database.windows.net;DATABASE=rd-cc-sqldb-fzdb-test;UID=azureuser;PWD=Obi@2024')
+    connectionString = os.environ["pyodbc_connection"]
+    print(connectionString)
+    conn = pyodbc.connect(connectionString)
     cursor = conn.cursor()
 
     cursor.execute('SELECT [order],[title] FROM [dbo].[ToDo] WHERE Id=?', '001BC389-B115-403C-9192-1EE079D45B7F')
