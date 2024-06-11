@@ -10,7 +10,7 @@ def test_pyodbc(req: func.HttpRequest) -> func.HttpResponse:
     conn = pyodbc.connect('DRIVER={ODBC Driver 18 for SQL Server};SERVER=da-cc-sqldb-fz-test.database.windows.net;DATABASE=rd-cc-sqldb-fzdb-test;UID=azureuser;PWD=Obi@2024')
     cursor = conn.cursor()
 
-    cursor.execute('SELECT [order],[title] FROM [dbo].[ToDo] WHERE Id=?', '280BBA6B-F3D1-4313-A883-5799AB21286C')
+    cursor.execute('SELECT [order],[title] FROM [dbo].[ToDo] WHERE Id=?', '001BC389-B115-403C-9192-1EE079D45B7F')
     rows = cursor.fetchall()
 
     json_data = []
